@@ -7,6 +7,7 @@ const { promisifyAll } = require('bluebird');
 const { REDIS_HOST, REDIS_PORT } = process.env;
 
 promisifyAll(redis);
+
 global.subscriber = redis.createClient({
   host: REDIS_HOST,
   port: REDIS_PORT,
@@ -19,7 +20,7 @@ global.publisher = redis.createClient({
 
 let messageCount = 0;
 
-exports.openPubSub = async (req, res) => {
+exports.resetPubSub = async (req, res) => {
   messageCount = 0;
   return res.send({ status: 200, message: 'pubsub activated' });
 };

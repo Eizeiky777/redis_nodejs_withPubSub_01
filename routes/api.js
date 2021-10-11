@@ -1,6 +1,6 @@
 const express = require('express');
 const { redisSetHashCache, redisGetHashCache, redisPurgeHashCache } = require('../controller/redis-hash');
-const { publishing, openPubSub } = require('../controller/redis-pubsub');
+const { publishing, resetPubSub } = require('../controller/redis-pubsub');
 const { redisSetCache, redisGetCache, redisPurgeCache } = require('../controller/redis-strings');
 
 const router = express.Router();
@@ -18,7 +18,7 @@ router.get('/get_hash_cache', redisGetHashCache);
 router.delete('/del_hash_cache', redisPurgeHashCache);
 
 // pubsub
-router.post('/pub_open', openPubSub);
+router.post('/pub_reset', resetPubSub);
 router.post('/pub_send_message', publishing);
 
 module.exports = router;
